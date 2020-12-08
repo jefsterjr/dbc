@@ -1,0 +1,19 @@
+{
+  "properties": [
+    {
+      "name": "ticket-log.desconto",
+      "type": "java.lang.Double",
+      "description": "Desconto após valor de corte"
+    },
+    {
+      "name": "ticket-log.valor-corte",
+      "type": "java.lang.Long",
+      "description": "Valor populacional para corte"
+    },
+    {
+      "name": "ticket-log.custo-populacional",
+      "type": "java.lang.Double",
+      "description": "Custo por habitante do estado em Dolar (USD)"
+    }
+  ]
+}

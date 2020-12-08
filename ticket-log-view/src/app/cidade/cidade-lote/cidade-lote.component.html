@@ -1,0 +1,58 @@
+<form>
+  <div class="d-flex justify-content-center container-fluid">
+    <div class="col-sm-9">
+      <h4 class="mb-3">Cadastro de Cidade</h4>
+      <div class="row">
+        <div class=" col-sm-3">
+          <label for="nome">Nome</label>
+          <input type="text" class="form-control text-uppercase" id="nome" name="nome" [(ngModel)]="model.nome"
+                 required>
+        </div>
+        <div class="col-sm-2">
+          <label for="populacao">População</label>
+          <input type="number" class="form-control " id="populacao" [(ngModel)]="model.populacao"
+                 name="populacao" required>
+        </div>
+        <div class="col-sm-3">
+          <label for="estado">Estado</label>
+          <select class="form-control" id="estado" [(ngModel)]="model.estado" name="estado" required>
+            <option [ngValue]="estado" *ngFor="let estado of estados">{{estado.nome}}</option>
+          </select>
+        </div>
+        <div class="col-sm-2" style="padding-top: 2.2%">
+          <button type="submit" class="form-control btn btn-primary" (click)="adicionar(model)">Adicionar<i class="fa fa-plus"></i></button>
+        </div>
+      </div>
+
+      <div class="row pt-3">
+        <h5 class="mb-3">Cidades adicionadas</h5>
+        <table class="table table-hover table-striped table-bordered">
+          <thead>
+          <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">População</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Ações</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let cidade of cidades; index as i">
+            <td>{{ cidade.nome }}</td>
+            <td>{{ cidade.populacao | number }}</td>
+            <td>{{ cidade.estado.nome }}</td>
+            <td> <button type="submit" class="form-control btn btn-danger" (click)="remover(i)"><i class="fa fa-trash"></i></button></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row pt-2">
+        <div class="col-sm-1">
+          <button type="submit" class="form-control btn btn-success" (click)="salvar(cidades)">Salvar</button>
+        </div>
+        <div class="col-sm-1">
+          <button type="button" class="form-control btn badge-info" (click)="voltar()">Voltar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

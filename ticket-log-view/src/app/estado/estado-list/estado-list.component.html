@@ -1,0 +1,51 @@
+<form>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Listagem de estados</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" routerLink="/cidade-list">Listar Cidades</a>
+        <a class="nav-item nav-link" routerLink="/cidade-form">Cadastrar Cidades</a>
+      </div>
+    </div>
+  </nav>
+  <div class="d-flex justify-content-center container-fluid">
+    <div class="col-sm-9">
+      <div class="row pt-5">
+        <div class="col-sm-12">
+          <table class="table table-hover table-striped table-bordered">
+            <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Bandeira</th>
+              <th scope="col">Nome</th>
+              <th scope="col">UF</th>
+              <th scope="col">População</th>
+              <th scope="col">Custo Populacional</th>
+
+              <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let estado of estados index as i">
+              <td>
+                {{estado.id}}
+              </td>
+              <td><img width="50" height="30" src="data:image/png;base64,{{estado.bandeira}}" alt="Red dot"/></td>
+              <td>{{ estado.nome }}</td>
+              <td>{{ estado.uf}}</td>
+              <td>{{ estado.populacao | number}}</td>
+              <td>{{ estado.custoPopulacional | currency:'BRL':true}}</td>
+              <td>
+                <button class="btn-success"><i class="fas fa-list"></i></button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
