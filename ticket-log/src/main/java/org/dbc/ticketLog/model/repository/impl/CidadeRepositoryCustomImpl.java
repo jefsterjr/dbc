@@ -10,7 +10,7 @@ import javax.persistence.Query;
 import java.util.List;
 
 @Repository
-public class CidadeRepositoryCustomÏmpl implements CidadeCustomRepository {
+public class CidadeRepositoryCustomImpl implements CidadeCustomRepository {
 
     @Autowired
     private EntityManager entityManager;
@@ -23,11 +23,11 @@ public class CidadeRepositoryCustomÏmpl implements CidadeCustomRepository {
         StringBuffer sql = new StringBuffer("SELECT c.id, c.nome, c.populacao, c.estado_id FROM cidade c where c.estado_id is not null ");
         if (nome != null) {
             paramCount++;
-            sql.append(" c.nome like ?");
+            sql.append(" and c.nome like ?");
         }
         if (estadoId != null) {
             paramCount++;
-            sql.append(" c.estado_id = ?");
+            sql.append(" and c.estado_id = ?");
         }
         query = entityManager.createNativeQuery(sql.toString());
 

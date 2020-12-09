@@ -5,11 +5,20 @@
       <div class="row">
         <div class=" col-sm-3">
           <label for="nome">Nome</label>
-          <input type="text" class="form-control text-uppercase" id="nome" name="nome" [(ngModel)]="model.nome"
-                 (blur)="pesquisar(model.nome)">
+          <input type="text" class="form-control text-uppercase" id="nome" name="nome" [(ngModel)]="model.nome">
+        </div>
+        <div class="col-sm-3">
+          <label for="estado">Estado</label>
+          <select class="form-control" id="estado" [(ngModel)]="model.estado" name="estado" required>
+            <option [ngValue]="estado" *ngFor="let estado of estados">{{estado.nome}}</option>
+          </select>
         </div>
       </div>
       <div class="row pt-3">
+        <div class="col-sm-2">
+          <button type="button" (click)="pesquisar(model)" class="form-control btn btn-success">Novo registro <i
+            class="fa fa-building"></i></button>
+        </div>
         <div class="col-sm-2">
           <button type="button" routerLink="/cidade-form" class="form-control btn btn-success">Novo registro <i
             class="fa fa-building"></i></button>

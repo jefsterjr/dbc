@@ -19,6 +19,7 @@ export class CidadeListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllEstados();
+    this.pesquisar(null);
     this.model = new Cidade();
   }
 
@@ -28,8 +29,8 @@ export class CidadeListComponent implements OnInit {
     });
   }
 
-  pesquisar(nome: string): void {
-    this.service.getAll(nome).subscribe(cidades => (this.cidades = cidades));
+  pesquisar(model:Cidade): void {
+    this.service.getAll(model).subscribe(cidades => (this.cidades = cidades));
   }
 
   limpar(): void {

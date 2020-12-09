@@ -20,11 +20,10 @@ export class CidadeService {
   }
 
 
-  getAll(nome: string): Observable<Cidade[]> {
-
+  getAll(model: Cidade): Observable<Cidade[]> {
     return this.httpClient.get<Cidade[]>(this.url, {
       params: {
-        nome: nome
+        nome: model.nome
       }
     });
   }

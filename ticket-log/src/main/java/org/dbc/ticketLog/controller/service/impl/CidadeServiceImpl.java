@@ -6,7 +6,7 @@ import org.dbc.ticketLog.model.exception.ExclusaoMunicipioException;
 import org.dbc.ticketLog.model.exception.NomeMunicipioException;
 import org.dbc.ticketLog.model.mapper.CidadeMapper;
 import org.dbc.ticketLog.model.repository.CidadeRepository;
-import org.dbc.ticketLog.model.repository.impl.CidadeRepositoryCustomÏmpl;
+import org.dbc.ticketLog.model.repository.impl.CidadeRepositoryCustomImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ public class CidadeServiceImpl implements CidadeService {
     private CidadeRepository repository;
 
     @Autowired
-    private CidadeRepositoryCustomÏmpl repositoryCustom;
+    private CidadeRepositoryCustomImpl repositoryCustom;
 
     @Autowired
     private CidadeMapper mapper;
