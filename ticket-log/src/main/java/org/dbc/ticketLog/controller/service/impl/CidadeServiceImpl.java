@@ -2,13 +2,12 @@ package org.dbc.ticketLog.controller.service.impl;
 
 import org.dbc.ticketLog.controller.service.CidadeService;
 import org.dbc.ticketLog.model.dto.CidadeDTO;
-import org.dbc.ticketLog.model.dto.CidadeListDTO;
 import org.dbc.ticketLog.model.exception.ExclusaoMunicipioException;
 import org.dbc.ticketLog.model.exception.NomeMunicipioException;
 import org.dbc.ticketLog.model.mapper.CidadeMapper;
 import org.dbc.ticketLog.model.repository.CidadeRepository;
+import org.dbc.ticketLog.model.repository.impl.CidadeRepositoryCustomÏmpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +19,9 @@ public class CidadeServiceImpl implements CidadeService {
     private CidadeRepository repository;
 
     @Autowired
+    private CidadeRepositoryCustomÏmpl repositoryCustom;
+
+    @Autowired
     private CidadeMapper mapper;
 
     @Override
@@ -28,8 +30,8 @@ public class CidadeServiceImpl implements CidadeService {
     }
 
     @Override
-    public List<CidadeListDTO> getAll(String nome, Long idEstado) {
-        return repository.findAllByNomeIsLike(nome, PageRequest.of(0, 20)).getContent();
+    public List<CidadeDTO> getAll(String nome, Long idEstado) {
+        return mapper.toDTO(repositoryCustom.findByFilter(nome, idEstado));
     }
 
     @Override
