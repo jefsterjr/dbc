@@ -1,5 +1,3 @@
-create database database_name with owner postgres;
-
 create schema ticket_log;
 
 alter schema ticket_log owner to postgres;
