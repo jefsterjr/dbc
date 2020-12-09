@@ -24,7 +24,7 @@ public class CidadeController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CidadeListDTO>> getAll(@RequestParam(required = false) String nome, @RequestParam(required = false) Long idEstado) {
+    public ResponseEntity<List<CidadeDTO>> getAll(@RequestParam(required = false) String nome, @RequestParam(required = false) Long idEstado) {
         return new ResponseEntity<>(service.getAll(nome, idEstado), HttpStatus.OK);
     }
 
