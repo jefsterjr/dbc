@@ -4,6 +4,7 @@ import {Cidade} from '../../model/Cidade';
 import {CidadeService} from '../cidade.service';
 import {EstadoService} from '../../estado/estado.service';
 import {Estado} from '../../model/Estado';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-cidade',
@@ -12,9 +13,20 @@ import {Estado} from '../../model/Estado';
 export class CidadeComponent implements OnInit {
   model: Cidade;
   estados: Estado[];
+  cidades: Cidade[];
 
-  constructor(private service: CidadeService, private estadoService: EstadoService, private location: Location) {
-  }
+  constructor(private service: CidadeService, private estadoService: EstadoService,
+              private location: Location, private activatedRoute: ActivatedRoute) {
+    this.activatedRoute.queryParams.subscribe(params => {
+      let id = params['id'];
+      if (id) {
+        this.service.getOne(id).subscribe(estados => {
+      }
+      // Print the parameter to the console.
+
+    });
+  };
+
 
   ngOnInit(): void {
     this.getAllEstados();
@@ -29,14 +41,32 @@ export class CidadeComponent implements OnInit {
   }
 
   salvar(model: Cidade): void {
-    this.service.save(model).subscribe(model => (this.model = model));
+    model.estado.bandeira = null;
+    this.service.save(model).subscribe(model => (model = model));
   }
 
-  delete(id: number): void {
-    this.service.delete(id).subscribe();
+  salvarTodos(cidades: Cidade[]): void {
+    this.service.salvarLista(cidades);
+  }
+
+  remover(i: number): void {
+    this.cidades.splice(i, 1);
   }
 
   voltar(): void {
     this.location.back();
+  }
+
+  adicionar(model: Cidade) {
+    if (!this.cidades) {
+      this.cidades = [];
+    }
+    this.cidades.push(model);
+    this.model = new Cidade();
+    this.model.estado = this.estados.find(estado => estado.uf === 'SC');
+  }
+
+  confirm(msg: string): boolean {
+    return confirm(msg);
   }
 }

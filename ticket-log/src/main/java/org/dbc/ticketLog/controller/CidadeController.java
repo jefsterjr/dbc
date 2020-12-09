@@ -2,6 +2,8 @@ package org.dbc.ticketLog.controller;
 
 import org.dbc.ticketLog.controller.service.CidadeService;
 import org.dbc.ticketLog.model.dto.CidadeDTO;
+import org.dbc.ticketLog.model.dto.CidadeListDTO;
+import org.dbc.ticketLog.model.exception.NomeMunicipioException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,19 +24,28 @@ public class CidadeController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CidadeDTO>> getAll(@RequestParam(required = false) String nome, @RequestParam(required = false) Long idEstado) {
+    public ResponseEntity<List<CidadeListDTO>> getAll(@RequestParam(required = false) String nome, @RequestParam(required = false) Long idEstado) {
         return new ResponseEntity<>(service.getAll(nome, idEstado), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<CidadeDTO> save(@RequestBody CidadeDTO cidadeDTO) {
-        return new ResponseEntity<CidadeDTO>(service.save(cidadeDTO), HttpStatus.CREATED);
+    public ResponseEntity save(@RequestBody CidadeDTO cidadeDTO) {
+        try {
+            service.save(cidadeDTO);
+        } catch (NomeMunicipioException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("/all")
-    public ResponseEntity<CidadeDTO> save(@RequestBody List<CidadeDTO> cidadeDTO) {
-        service.save(cidadeDTO);
-        return new ResponseEntity<CidadeDTO>(HttpStatus.CREATED);
+    public ResponseEntity save(@RequestBody List<CidadeDTO> cidadeDTO) {
+        try {
+            service.save(cidadeDTO);
+        } catch (NomeMunicipioException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")

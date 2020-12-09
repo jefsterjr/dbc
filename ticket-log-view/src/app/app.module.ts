@@ -8,7 +8,9 @@ import {CidadeComponent} from './cidade/cidade-form/cidade.component';
 import {CidadeListComponent} from './cidade/cidade-list/cidade-list.component';
 import {EstadoListComponent} from './estado/estado-list/estado-list.component';
 import {AppRoutingModule} from './app.routing.module';
-import {CidadeLoteComponent} from './cidade/cidade-lote/cidade-lote.component';
+import {MessagesComponent} from './messages/messages.component';
+import {HttpErrorHandler} from './http-error-handler.service';
+import {MessageService} from './messages/message.service';
 
 @NgModule({
   declarations: [
@@ -16,15 +18,19 @@ import {CidadeLoteComponent} from './cidade/cidade-lote/cidade-lote.component';
     CidadeComponent,
     EstadoListComponent,
     CidadeListComponent,
-    CidadeLoteComponent
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule
+
   ],
-  providers: [],
+  providers: [
+    HttpErrorHandler,
+    MessageService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

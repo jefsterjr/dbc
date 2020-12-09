@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Cidade} from '../../model/Cidade';
 import {Estado} from '../../model/Estado';
 import {CidadeService} from '../cidade.service';
@@ -19,19 +19,12 @@ export class CidadeListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllEstados();
-    // this.getAll();
     this.model = new Cidade();
   }
 
   getAllEstados(): void {
     this.estadoService.getAll().subscribe(estados => {
       this.estados = estados;
-    });
-  }
-
-  getAll(model:Cidade): void {
-    this.service.getAll(model).subscribe(cidades => {
-      this.cidades = cidades;
     });
   }
 
@@ -43,8 +36,15 @@ export class CidadeListComponent implements OnInit {
     this.model = new Cidade();
   }
 
-
   voltar(): void {
     this.location.back();
+  }
+
+  editar(cidade: Cidade) {
+
+  }
+
+  deletar(id: number): void {
+    this.service.delete(id).subscribe();
   }
 }

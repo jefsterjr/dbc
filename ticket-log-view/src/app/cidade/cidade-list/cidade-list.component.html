@@ -16,42 +16,51 @@
         </div>
       </div>
       <div class="row pt-3">
-        <div class="col-sm-1">
-          <button type="button" routerLink="/cidade-form" class="form-control btn btn-success">Novo</button>
-        </div>
         <div class="col-sm-2">
-          <button type="button" routerLink="/cidade-lote" class="form-control btn btn-primary">Novo (em lote)</button>
+          <button type="button" routerLink="/cidade-form" class="form-control btn btn-success">Novo registro <i
+            class="fa fa-building"></i></button>
         </div>
         <div class="col-sm-1">
-          <button type="button" class="form-control btn badge-info" (click)="limpar()">Limpar</button>
+          <button type="button" class="form-control btn badge-info" (click)="limpar()">Limpar <i
+            class="fa fa-eraser"></i></button>
         </div>
         <div class="col-sm-1">
-          <button type="button" class="form-control btn btn-secondary" (click)="voltar()">Voltar</button>
+          <button type="button" class="form-control btn btn-secondary" (click)="voltar()">Voltar <i
+            class="fa fa-arrow-left"></i></button>
         </div>
       </div>
-      <div class="row pt-3">
-        <table class="table table-hover table-striped table-bordered">
-          <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Nome</th>
-            <th scope="col">População</th>
-            <th scope="col">Estado</th>
-            <th scope="col">Ações</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let cidade of cidades; index as i">
-            <td>
-              {{cidade.id}}
-            </td>
-            <td>{{ cidade.nome }}</td>
-            <td>{{ cidade.populacao | number }}</td>
-            <td>{{ cidade.estado.nome }}</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+      <hr>
+      <table class="table table-hover table-striped table-bordered">
+        <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nome</th>
+          <th scope="col">População</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let cidade of cidades; index as i">
+          <td>
+            {{cidade.id}}
+          </td>
+          <td>{{ cidade.nome }}</td>
+          <td>{{ cidade.populacao | number }}</td>
+          <td>{{ cidade.estado.nome }}</td>
+          <td><div class="row">
+            <div class="col-sm-6">
+                <span type="button" class="form-control btn btn-success btn-sm" title="Salvar" (click)="editar(cidade)"><i
+                  class="fa fa-pencil"></i></span>
+            </div>
+            <div class="col-sm-6">
+                <span type="button" class="form-control btn btn-danger btn-sm" title="Deletar" (click)="confirm('Deseja realmente demover esse registros?') && deletar(cidade.id)"><i
+                  class="fa fa-trash"></i></span>
+            </div>
+          </div></td>
+        </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </form>

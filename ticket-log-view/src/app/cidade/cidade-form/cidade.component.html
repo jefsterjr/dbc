@@ -1,6 +1,6 @@
 <form>
   <div class="d-flex justify-content-center container-fluid">
-    <div class="col-sm-9">
+    <div class="col-sm-6">
       <h4 class="mb-3">Cadastro de Cidade</h4>
       <div class="row">
         <div class=" col-sm-3">
@@ -19,20 +19,58 @@
             <option [ngValue]="estado" *ngFor="let estado of estados">{{estado.nome}}</option>
           </select>
         </div>
-        <div class="col-sm-3">
-
+        <div class="col-sm-1" *ngIf="model.estado">
+          <img width="60" height="40" src="data:image/png;base64,{{model.estado.bandeira}}"
+               style="padding-top: 7px !important;"
+               class="rounded mt-4"
+               alt="{{model.estado.nome}}">
+        </div>
+        <div class="col-sm-2" style="padding-top: 3%">
+          <button [disabled]="!model.nome || !model.populacao || !model.estado" type="button"
+                  class="form-control btn btn-success" (click)="adicionar(model)">
+            Adicionar <i class="fa fa-plus"></i></button>
         </div>
       </div>
+      <hr>
+      <h5 class="mb-3">Cidades adicionadas</h5>
+      <table class="table table-hover table-striped table-bordered">
+        <thead>
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">População</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngIf="!cidades">
+          <td colspan="5">Nenhum registro adicionado</td>
+        </tr>
+        <tr *ngFor="let cidade of cidades; index as i">
+          <td>{{ cidade.nome | uppercase}}</td>
+          <td>{{ cidade.populacao | number }}</td>
+          <td>{{ cidade.estado.nome }}</td>
+          <td>
+            <div class="row">
+              <div class="col-sm-6">
+                <span type="button" class="form-control btn btn-success btn-sm" title="Salvar" (click)="salvar(cidade)"><i
+                  class="fa fa-save"></i></span>
+              </div>
+              <div class="col-sm-6">
+                <span type="button" class="form-control btn btn-danger btn-sm" title="Deletar" (click)="confirm('Deseja realmente demover esse registros?') && remover(i)"><i
+                  class="fa fa-trash"></i></span>
+              </div>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <hr>
       <div class="row pt-2">
-        <div class="col-sm-1">
-          <button type="submit" class="form-control btn btn-success" (click)="salvar(model)">Salvar</button>
+        <div class="col-sm-3">
+          <button type="submit" class="form-control btn btn-success" [disabled]="!cidades || cidades.length >= 1" (click)="salvarTodos(cidades)">Salvar</button>
         </div>
-        <div class="col-sm-1">
-          <button *ngIf="!model.estado || model.estado.uf != 'RS'" type="button" class="form-control btn btn-danger"
-                  (click)="delete(model.id)">Excluir
-          </button>
-        </div>
-        <div class="col-sm-1">
+        <div class="col-sm-3">
           <button type="button" class="form-control btn badge-info" (click)="voltar()">Voltar</button>
         </div>
       </div>

@@ -19,7 +19,7 @@ export class EstadoListComponent implements OnInit {
   }
 
   getAllCustoPopulacional(): void {
-    this.service.getAll().subscribe(estados => {
+    this.service.getAllCustoPopulacional().subscribe(estados => {
       this.estados = estados;
     });
   }

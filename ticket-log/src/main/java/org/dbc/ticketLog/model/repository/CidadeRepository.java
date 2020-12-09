@@ -1,6 +1,7 @@
 package org.dbc.ticketLog.model.repository;
 
 import org.dbc.ticketLog.model.Cidade;
+import org.dbc.ticketLog.model.dto.CidadeListDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,7 +23,6 @@ public interface CidadeRepository extends JpaRepository<Cidade, Long> {
     @Query("DELETE FROM Cidade c where c.id = :id")
     void delete(@Param("id") Long id);
 
-    Page<Cidade> findAllByEstado_Id(Long id, Pageable pageable);
-
-    Page<Cidade> findAllByNomeIsLike(String nome, Pageable pageable);
+    @Query("SELECT new org.dbc.ticketLog.model.dto.CidadeListDTO(c.id, c.nome, c.populacao, e.nome) FROM Cidade c LEFT JOIN c.estado e where c.nome LIKE :nome")
+    Page<CidadeListDTO> findAllByNomeIsLike(@Param("nome") String nome, Pageable pageable);
 }
