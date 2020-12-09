@@ -10,8 +10,8 @@ COPY . .
 
 RUN npm run build --prod
 
-FROM nginx:1.15.8-alpine
+FROM nginx
 
-COPY --from=builder /usr/src/app/dist/ticker-log-front/  /usr/share/nginx/html
+COPY --from=builder /usr/src/app/dist/ticker-log-front  /usr/share/nginx/html
 
-EXPOSE 4200
+EXPOSE 80
