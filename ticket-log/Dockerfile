@@ -1,12 +1,10 @@
 FROM openjdk:11-jre
 LABEL maintainer =  'Jefster Farlei'
 
-RUN useradd cidade && \
-    mkdir /app && \
-    chown cidade /app
-USER cidade
-WORKDIR /app
+WORKDIR /ticker-log
+COPY target/ticket-log-1.0.0.jar .
+COPY assets .
+EXPOSE 8400
 
-ENTRYPOINT ["java", "-jar", "target/cidade-1.0.0.jar"]
+ENTRYPOINT ["java", "-jar", "ticket-log-1.0.0.jar"]
 
-EXPOSE 8080

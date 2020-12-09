@@ -1,10 +1,12 @@
 FROM node:12.7-alpine AS build
-WORKDIR /usr/src/app
+RUN mkdir -p  /app
+WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
-COPY . .
-RUN npm run build
+COPY . /app
+RUN npm run build --prod
 
 FROM nginx:1.19.5-alpine
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY --from=build /usr/src/app/dist/ticket-log-view /usr/share/nginx/html
+COPY --from=build app/dist/ticker-log-front /usr/share/nginx/html
+
+EXPOSE 4200

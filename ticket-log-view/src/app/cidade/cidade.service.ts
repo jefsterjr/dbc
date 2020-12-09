@@ -24,13 +24,13 @@ export class CidadeService {
 
     return this.httpClient.get<Cidade[]>(this.url, {
       params: {
-        nome:nome
+        nome: nome
       }
     });
   }
+
   getOne(id: number): Observable<Cidade> {
-    return this.httpClient.get<Cidade>(this.url+'/'+id).pipe(
-      catchError(this.handleError('getOne', id)));
+    return this.httpClient.get<Cidade>(this.url + '/' + id);
   }
 
 
@@ -47,6 +47,6 @@ export class CidadeService {
 
   delete(id: number) {
     return this.httpClient.delete<void>(this.url + '/' + id).pipe(
-      catchError(this.handleError('save', id)));
+      catchError(this.handleError('delete', id)));
   }
 }

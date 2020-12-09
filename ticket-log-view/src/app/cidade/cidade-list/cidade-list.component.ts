@@ -28,8 +28,8 @@ export class CidadeListComponent implements OnInit {
     });
   }
 
-  pesquisar(model: Cidade): void {
-    this.service.getAll(model).subscribe(cidades => (this.cidades = cidades));
+  pesquisar(nome: string): void {
+    this.service.getAll(nome).subscribe(cidades => (this.cidades = cidades));
   }
 
   limpar(): void {

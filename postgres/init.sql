@@ -1,6 +1,6 @@
 INSERT INTO ticket_log.estado(id, nome, uf) VALUES(1,UPPER('RIO GRANDE DO SUL'),'RS');
 INSERT INTO ticket_log.estado(id, nome, uf) VALUES(2,UPPER('SANTA CATARINA'),'SC');
-INSERT INTO ticket_log.estado(id, nome, uf) VALUES(3,UPPER('PARANÁ'),'RS');
+INSERT INTO ticket_log.estado(id, nome, uf) VALUES(3,UPPER('PARANÁ'),'PR');
 
 INSERT INTO ticket_log.cidade(estado_id, nome, populacao ) VALUES(1,UPPER('Porto Alegre'),1409351);
 INSERT INTO ticket_log.cidade(estado_id, nome, populacao ) VALUES(1,UPPER('Caxias do Sul'),435564);

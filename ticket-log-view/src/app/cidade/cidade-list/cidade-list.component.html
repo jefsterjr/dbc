@@ -6,13 +6,7 @@
         <div class=" col-sm-3">
           <label for="nome">Nome</label>
           <input type="text" class="form-control text-uppercase" id="nome" name="nome" [(ngModel)]="model.nome"
-                 (blur)="pesquisar(model)">
-        </div>
-        <div class="col-sm-3">
-          <label for="estado">Estado</label>
-          <select class="form-control" id="estado" [(ngModel)]="model.estado" name="estado" (change)="pesquisar(model)">
-            <option [ngValue]="estado" *ngFor="let estado of estados">{{estado.nome}}</option>
-          </select>
+                 (blur)="pesquisar(model.nome)">
         </div>
       </div>
       <div class="row pt-3">

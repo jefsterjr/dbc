@@ -20,9 +20,8 @@ export class CidadeComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(params => {
       let id = params['id'];
       if (id) {
-        this.service.getOne(id).subscribe(estados => {
+        this.service.getOne(id).subscribe(cidade => this.model = cidade);
       }
-      // Print the parameter to the console.
 
     });
   };
